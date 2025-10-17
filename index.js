@@ -6,7 +6,7 @@ let button = document.querySelector("button");
 let style = document.querySelector("style");
 let initialStyleHTML = style.innerHTML;
 
-funciton hit() {
+funciton whip() {
   let shakeCSS = "\n@keyframes shake {";
   for(let i = 0; i <= 100; i += Math.floor(100/KEYFRAME_AMOUNT)) {
     let randX = Math.floor(Math.random() * (200 - 2*i)) - 100;
@@ -16,10 +16,10 @@ funciton hit() {
   shakeCSS += "\n}\n";
   style.innerHTML = initialStyleHTML + shakeCSS;
   
-  button.classList.add("hit");
+  button.classList.add("whipped");
 }
 
-buttonPositioner.addEventListener("click", hit);
-button.addEventListener("click", hit);
+buttonPositioner.addEventListener("click", whip);
+button.addEventListener("click", whip);
 
-button.addEventListener("animationend", () => {button.classList.remove("hit");});
+button.addEventListener("animationend", () => {button.classList.remove("whipped");});
