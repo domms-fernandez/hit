@@ -12,19 +12,7 @@ let mousePos = {x: window.innerWidth * 0.5, y: window.innerHeight * 0.5};
 document.addEventListener("mousemove", (e) => {mousePos = e;});
 
 function hit() {
-  let shakeCSS = "\n@keyframes shake {";
-  for(let i = 0; i <= 100; i += Math.floor(100/KEYFRAME_AMOUNT)) {
-    let randX = Math.floor(Math.random() * (200 - 2*i));
-    let randY = Math.floor(Math.random() * (200 - 2*i));
-    shakeCSS += `\n${i}% {transform: translate(${randX}%, ${randY}%)}`;
-  }
-  shakeCSS += "\n}\n";
-  style.innerHTML = initialStyleHTML + shakeCSS;
-
-  new Audio("/hit/whip.mp3").play();
   buttonCutoff.classList.remove("hit");
-  buttonCutoff.classList.add("hit");
-
   let buttonCutoffRect = buttonCutoff.getBoundingClientRect();
   let scar = document.createElement("img");
   scar.src = "/hit/scar.png";
@@ -33,6 +21,19 @@ function hit() {
   top: ${mousePos.y - buttonCutoffRect.top - 10}px;
   transform: rotate(${Math.floor(Math.random() * 360)}deg);`;
   buttonCutoff.appendChild(scar);
+  
+  let shakeCSS = "\n@keyframes shake {";
+  for(let i = 0; i <= 100; i += Math.floor(100/KEYFRAME_AMOUNT)) {
+    let randX = Math.floor(Math.random() * (200 - 2*i));
+    let randY = Math.floor(Math.random() * (200 - 2*i));
+    shakeCSS += `\n${i}% {transform: translate(${randX}%, ${randY}%)}`;
+  }
+  shakeCSS += "\n}\n";
+  style.innerHTML = initialStyleHTML + shakeCSS;
+  
+  buttonCutoff.classList.add("hit");
+
+  new Audio("/hit/whip.mp3").play();
 }
 
 buttonPositioner.addEventListener("click", hit);
