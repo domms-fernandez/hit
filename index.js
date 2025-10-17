@@ -13,13 +13,13 @@ funciton hit() {
     let randY = Math.floor(Math.random() * (200 - 2*i)) - 100;
     shakeCSS += `\n${i}% {transform: translate(${randX}%, ${randY}%)}`;
   }
-  shakeCSS += "\n}";
-
+  shakeCSS += "\n}\n";
   style.innerHTML = initialStyleHTML + shakeCSS;
-  button.classList.remove("hit");
+  
   button.classList.add("hit");
 }
 
 buttonPositioner.addEventListener("click", hit);
 button.addEventListener("click", hit);
 
+button.addEventListener("animationend", () => {button.classList.remove("hit");});
