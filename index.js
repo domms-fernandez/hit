@@ -1,6 +1,7 @@
 const KEYFRAME_AMOUNT = 50;
 
 let buttonPositioner = document.querySelector("div");
+let buttonCutoff = document.getElementById("button-cutoff");
 let button = document.querySelector("button");
 
 let style = document.querySelector("style");
@@ -17,8 +18,17 @@ function hit() {
   style.innerHTML = initialStyleHTML + shakeCSS;
 
   new Audio("/hit/whip.mp3").play();
-  button.classList.remove("hit");
-  button.classList.add("hit");
+  buttonCutoff.classList.remove("hit");
+  buttonCutoff.classList.add("hit");
+
+  let buttonCutoffRect = buttonCutoff.getBoundingClientRect();
+  let scar = document.createElement("img");
+  scar.src = "/hit/scar.png";
+  scar.style = `
+  left: ${mousePos.x - buttonCutoffRect.left - 10}px;
+  top: ${mousePos.y - buttonCutoffRect.top - 10}px;
+  transform: rotate(${Math.floor(Math.random() * 360)}deg);`;
+  buttonCutoff.appendChild(scar);
 }
 
 buttonPositioner.addEventListener("click", hit);
