@@ -1,3 +1,4 @@
+//buzzword
 const KEYFRAME_AMOUNT = 50;
 
 let buttonPositioner = document.querySelector("div");
@@ -24,11 +25,12 @@ function hit() {
   buttonCutoff.classList.remove("hit");
   buttonCutoff.classList.add("hit");
 
+  let buttonCutoffRect = buttonCutoff.getBoundingClientRect();
   let scar = document.createElement("img");
   scar.src = "/hit/scar.png";
   scar.style = `
-  left: ${mousePos.x - 10}px;
-  top: ${mousePos.y - 10}px;
+  left: ${mousePos.x - buttonCutoffRect.left - 10}px;
+  top: ${mousePos.y - buttonCutoffRect.top - 10}px;
   transform: rotate(${Math.floor(Math.random() * 360)}deg);`;
   buttonCutoff.appendChild(scar);
 }
