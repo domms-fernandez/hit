@@ -1,4 +1,4 @@
-//buzzword
+//hawk tuah!
 const KEYFRAME_AMOUNT = 50;
 
 let buttonPositioner = document.querySelector("div");
@@ -14,6 +14,7 @@ document.addEventListener("mousemove", (e) => {mousePos = e;});
 function hit() {
   buttonCutoff.classList.remove("hit");
   let buttonCutoffRect = buttonCutoff.getBoundingClientRect();
+  
   let scar = document.createElement("img");
   scar.src = "/hit/scar.png";
   scar.style = `
@@ -24,15 +25,16 @@ function hit() {
   
   let shakeCSS = "\n@keyframes shake {";
   for(let i = 0; i <= 100; i += Math.floor(100/KEYFRAME_AMOUNT)) {
-    let randX = Math.floor(Math.random() * (200 - 2*i));
-    let randY = Math.floor(Math.random() * (200 - 2*i));
+    let randX = Math.floor(Math.random() * (100 - i));
+    if(!Math.floor(Math.random()) * 2) randX *= -1;
+    let randY = Math.floor(Math.random() * (100 - i));
+    if(!Math.floor(Math.random()) * 2) randY *= -1;
     shakeCSS += `\n${i}% {transform: translate(${randX}%, ${randY}%)}`;
   }
   shakeCSS += "\n}\n";
   style.innerHTML = initialStyleHTML + shakeCSS;
   
   buttonCutoff.classList.add("hit");
-
   new Audio("/hit/whip.mp3").play();
 }
 
