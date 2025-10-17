@@ -7,6 +7,9 @@ let button = document.querySelector("button");
 let style = document.querySelector("style");
 let initialStyleHTML = style.innerHTML;
 
+let mousePos = {x: window.innerWidth * 0.5, y: window.innerHeight * 0.5};
+document.addEventListener("mousemove", (e) => {mousePos = e;});
+
 function hit() {
   let shakeCSS = "\n@keyframes shake {";
   for(let i = 0; i <= 100; i += Math.floor(100/KEYFRAME_AMOUNT)) {
@@ -21,12 +24,11 @@ function hit() {
   buttonCutoff.classList.remove("hit");
   buttonCutoff.classList.add("hit");
 
-  let buttonCutoffRect = buttonCutoff.getBoundingClientRect();
   let scar = document.createElement("img");
   scar.src = "/hit/scar.png";
   scar.style = `
-  left: ${mousePos.x - buttonCutoffRect.left - 10}px;
-  top: ${mousePos.y - buttonCutoffRect.top - 10}px;
+  left: ${mousePos.x - 10}px;
+  top: ${mousePos.y - 10}px;
   transform: rotate(${Math.floor(Math.random() * 360)}deg);`;
   buttonCutoff.appendChild(scar);
 }
