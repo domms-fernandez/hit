@@ -6,21 +6,20 @@ let button = document.querySelector("button");
 let style = document.querySelector("style");
 let initialStyleHTML = style.innerHTML;
 
-function whip() {
+function hit() {
   let shakeCSS = "\n@keyframes shake {";
   for(let i = 0; i <= 100; i += Math.floor(100/KEYFRAME_AMOUNT)) {
-    let randX = Math.floor(Math.random() * (200 - 2*i)) - 100;
-    let randY = Math.floor(Math.random() * (200 - 2*i)) - 100;
+    let randX = Math.floor(Math.random() * (200 - 2*i));
+    let randY = Math.floor(Math.random() * (200 - 2*i));
     shakeCSS += `\n${i}% {transform: translate(${randX}%, ${randY}%)}`;
   }
   shakeCSS += "\n}\n";
   style.innerHTML = initialStyleHTML + shakeCSS;
 
   new Audio("/hit/whip.mp3").play();
-  button.classList.add("whipped");
+  button.classList.remove("hit");
+  button.classList.add("hit");
 }
 
-buttonPositioner.addEventListener("click", whip);
-button.addEventListener("click", whip);
-
-button.addEventListener("animationend", () => {button.classList.remove("whipped");});
+buttonPositioner.addEventListener("click", hit);
+button.addEventListener("click", hit);
